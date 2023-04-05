@@ -41,18 +41,34 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    # External APPS
+    'django.contrib.sites',
+    # ! External APPS
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'phonenumber_field',
     'django_ckeditor_5',
-    # Internal APPS
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    # ! Internal APPS
     'APIs.apps.ApisConfig',
+    'Base.apps.BaseConfig',
     'Users.apps.UsersConfig',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'middleware.language.LocaleMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,10 +91,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'Config.wsgi.application'
 
@@ -135,17 +153,18 @@ LANGUAGE_COOKIE_NAME = '_language'
 
 LOCALE_PATHS = [str(BASE_DIR.joinpath('locale'))]
 
+CKEDITOR_5_CONFIGS = {}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-# Static files
+# ! Static files
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
 STATIC_ROOT = str(BASE_DIR.joinpath('staticfile'))
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# Media files
+# ! Media files
 MEDIA_URL = 'media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 
@@ -156,3 +175,37 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'Users.CustomUserModel'
+
+LOGIN_REDIRECT_URL = 'base'
+# LOGOUT_REDIRECT_URL = 'login'
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_EMAIL_REQUIRED = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+        'APP': {
+            'client_id': os.getenv('GOOGLE_CLIENT_ID', '401530176638-o77loh0d8e36986ejim79habsd1bmn14.apps.googleusercontent.com'),
+            'secret': os.getenv('GOOGLE_SECRET_KEY', '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'),
+            'key': ''
+        }
+    },
+    'facebook': {
+        'METHOD': 'oauth2',
+        'APP': {
+            'client_id': os.getenv('FACEBOOK_CLIENT_ID', '92146761255793'),
+            'secret': os.getenv('FACEBOOK_SECRET_KEY', '21d9793e4fced132c25234fa207441e7'),
+            'key': ''
+        }
+    },
+    
+}

@@ -6,15 +6,30 @@ from django_ckeditor_5.fields import CKEditor5Field
 from autoslug import AutoSlugField
 from django.urls import reverse
 
-# Create your models here.   
-class CustomUserModel(AbstractUser):
+
+# Create your models here.
+class ABSTRACTModel(models.Model):
+    created = models.DateTimeField(
+        auto_now_add = True
+    )
+    updated = models.DateTimeField(
+        auto_now = True
+    )
     phone = PhoneNumberField(
         null = True,
         blank = True
     )
+    class Meta:
+        abstract = True
+        
+class CustomUserModel(AbstractUser,ABSTRACTModel):
+    class Meta:
+        verbose_name = 'Account'
+        verbose_name_plural = 'Accounts'
+    
     confirm = models.BooleanField(
         name = 'confirm',
-        help_text="Do you agree to send news to your email?",
+        help_text = 'Do you agree to send news to your email?',
         default = False
     )
     email_verification = models.BooleanField(
@@ -27,15 +42,12 @@ class CustomUserModel(AbstractUser):
         return reverse('login')
     
     
-class Profile(models.Model):
+class Profile(ABSTRACTModel):
     user = models.OneToOneField(
         get_user_model(),
         on_delete = models.CASCADE 
     )
-    phone = PhoneNumberField(
-        null = True,
-        blank = True
-    )
+   
     email = models.EmailField(
         null = True,
         blank = True
@@ -96,5 +108,5 @@ class Profile(models.Model):
         return str(self._username)
     
     def get_absolute_url(self):
-        return reverse("profile", kwargs={"slug": self.slug})
+        return reverse('profile', kwargs={'slug': self.slug})
 
