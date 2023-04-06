@@ -1,7 +1,28 @@
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from .models import CustomUserModel, Profile
+from allauth.account.signals import user_signed_up
+from allauth.socialaccount.models import SocialAccount
 
+
+@receiver(user_signed_up)
+def user_signed_up_(request, user, **kwargs):
+    try:
+        provider_data = SocialAccount.objects.get(user=user)
+        if provider_data.provider == 'google':
+            user.last_name = provider_data.extra_data['family_name']
+            user.first_name = provider_data.extra_data['given_name']
+            user.save()
+            profile = Profile.objects.get(user = user)
+            profile.location = provider_data.extra_data['locale']
+            profile.user_pic = provider_data.extra_data['picture']
+            profile.save()
+        if provider_data.provider == 'facebook':
+            user.last_name = provider_data.extra_data['last_name']
+            user.first_name = provider_data.extra_data['first_name']
+            user.save()
+    except:
+        pass
 
 @receiver(post_save, sender = Profile) # ! save this
 def profile_save_user(sender, instance, **kwargs):
