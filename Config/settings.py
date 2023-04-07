@@ -309,7 +309,26 @@ SOCIALACCOUNT_PROVIDERS = {
     },
     'facebook': {
         'METHOD': 'oauth2',
-        'APP': {
+        # 'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': 'path.to.callable',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v13.0',
+        'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
+        'APP':{
             'client_id': os.getenv('FACEBOOK_CLIENT_ID', '92146761255793'),
             'secret': os.getenv('FACEBOOK_SECRET_KEY', '21d9793e4fced132c25234fa207441e7'),
             'key': ''
