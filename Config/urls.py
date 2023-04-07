@@ -22,6 +22,7 @@ from django.urls import path, include
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('ckeditor5/', include('django_ckeditor_5.urls')),
+
 ] + i18n_patterns(
     
     path('admin/', admin.site.urls),
@@ -30,6 +31,7 @@ urlpatterns = [
     path('', include('Base.urls')),
     path('user/', include('Users.urls')),
     # path('register/', include('django.contrib.auth.urls')),
+    
 ) + static(
     settings.MEDIA_URL, document_root = settings.MEDIA_ROOT
 ) + static(

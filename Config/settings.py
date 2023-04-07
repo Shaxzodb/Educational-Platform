@@ -52,9 +52,14 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'phonenumber_field',
     'django_ckeditor_5',
+    'widget_tweaks',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
     # ! Providers
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.github',
     # ! Internal APPS
     'APIs.apps.ApisConfig',
     'Base.apps.BaseConfig',
