@@ -21,6 +21,15 @@ def user_signed_up_(request, user, **kwargs):
             user.last_name = provider_data.extra_data['last_name']
             user.first_name = provider_data.extra_data['first_name']
             user.save()
+        if provider_data.provider == 'github':
+            user.last_name = provider_data.extra_data['name']
+            user.save()
+            profile = Profile.objects.get(user = user)
+            profile.location = provider_data.extra_data['location']
+            profile.user_pic = provider_data.extra_data['avatar_url']
+            profile.bio = provider_data.extra_data['bio']
+            profile.website = provider_data.extra_data['blog']
+            profile.save()
     except:
         pass
 

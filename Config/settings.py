@@ -334,6 +334,20 @@ SOCIALACCOUNT_PROVIDERS = {
             'key': ''
         }
     },
+    'github': {
+        'SCOPE': [
+            'user',
+            'repo',
+            'read:org',
+        ],
+        'METHOD': 'oauth2',
+        'APP':{
+            'client_id': os.getenv('GITHUB_CLIENT_ID', '32a52a0d5ab187117a5f'),
+            'secret': os.getenv('GITHUB_SECRET_KEY', '4c82aaddcf38550b4bc0dac1c24b7f96ff5a5d3e'),
+            'key': ''
+        }
+    }
+
     
 }
 

@@ -13,7 +13,7 @@
               <div class="d-flex justify-content-center">
                 <div class="card-title">
                   <center>
-                    <img src={% static 'img/user_default_pic.png' %}
+                    <img src={% static 'img/default-FFA-avatar.2f8c2a0592bda1c5.png' %}
                     style='border-radius:100%' width='100' height='100' />
                   </center>
                   <h4><b>{{login}}</b></h4>
@@ -26,8 +26,8 @@
               <form method="POST">
                 {% csrf_token %} {{form|crispy}}
                 <div class="d-grid gap-1 p-0">
-                  <button type="submit" class="m-0 btn btn-primary">
-                    {{login}} <i class="bi bi-box-arrow-in-right"></i>
+                  <button style='font-weight: bold;' type="submit" class="m-0 btn btn-primary">
+                    <i class="bi bi-box-arrow-in-left"></i> {{login}}
                   </button>
                 </div>
               </form>
@@ -37,16 +37,21 @@
               <div class='col-5'><hr></div>
              </div>
 
-              <div class="row g-1 gap-2 mb-3">
-                <a
+              <div class="row gap-2 mb-3">
+                <a style='font-weight: bold;'
                   href="{% provider_login_url 'google' %}"
-                  class="btn btn-outline-primary col"
-                  ><i class="bi bi-google"></i> Google</a
+                  class="btn btn-outline-info col"
+                  ><i class="bi bi-google"></i><br/>Google</a
                 >
-                <a
+                <a style='font-weight: bold;'
                   href="{% provider_login_url 'facebook' %}"
-                  class="btn btn-outline-success col"
-                  ><i class="bi bi-facebook"></i> Facebook</a
+                  class="btn btn-outline-primary col"
+                  ><i class="bi bi-facebook"></i><br/>Facebook</a
+                >
+                <a style='font-weight: bold;'
+                  href="{% provider_login_url 'github' %}"
+                  class="btn btn-outline-success"
+                  ><i class="bi bi-github"></i><br/>GitHub</a
                 >
                 
               </div>
