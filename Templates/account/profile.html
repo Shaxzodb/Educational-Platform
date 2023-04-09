@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+    <div class="row my-3">
+      <div class="col-lg-6">
+        <div class="card" style="width: 100%">
+          <div class="row g-0">
+            <div style='' class="col-md-4 p-2 d-flex justify-content-center">
+               
+              {% if object.user_pic %}
+                
+                {% if 'https' in object.user_pic.url %}
+                    {{saa}}
+                    <img
+                        style="object-fit: contain;"
+                        src="{{object.user_pic}}"
+                        class="img-fluid rounded"
+                        alt="..."
+                    />
+                {% else %}
+                    <img
+                        style="object-fit: contain;"
+                        src="{{object.user_pic.url}}"
+                        class="img-fluid rounded"
+                        alt="..."
+                    />
+                {% endif %}
+             
+              {% else %}
+              <img
+                style="object-fit: contain;"
+                src="{% static 'img/user.png' %}"
+                class="img-fluid rounded"
+                alt="..."
+              />
+              {% endif %}
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                
+                <h5 class="card-title">@{{object.user.username}}</h5>
+                <hr class="p-0 my-1 m-0">
+                <p class="card-text">Email: {{object.email}}</p>
+                {% if object.last_name %}
+                <p class="card-text">{% trans "Last Name" %}: {{object.last_name}}</p>
+                {% endif %} {% if object.first_name %}
+                <p class="card-text">{% trans "First Name" %}: {{object.first_name}}</p>
+                {% endif %} {% if object.phone %}
+                <p class="card-text">Phone: {{object.phone}}</p>
+                {% endif %} {% if object.birth_date %}
+                <p class="card-text">{% trans "Birth date" %}: {{object.birth_date}}</p>
+                {% endif %} {% if object.location %}
+                <p class="card-text">{% trans "Location" %}: {{object.location}}</p>
+                {% endif %} {% if object.website %}
+                <p class="card-text">Website: {{object.website|urlize}}</p>
+                {% endif %}
+                {% if user.is_authenticated and user.id == object.user.id%}
+                <a class='text-secondary' style="text-decoration: none;" href="">{% trans "Profilni tahrirlash" %} <i class="bi bi-pencil-square"></i></a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 mt-lg-0 mt-3">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Accordion Item #1
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <div class ='ck-content'>
+                  {{object.bio|safe}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

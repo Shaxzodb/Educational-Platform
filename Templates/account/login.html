@@ -5,7 +5,7 @@
 <div class="row">
   <div class="col-lg-5 login"></div>
   <div class="col-lg-7">
-    <div class="container-fluid py-3 d-flex justify-content-center">
+    <div class="container-fluid d-flex justify-content-center">
       <div class="form-login">
         <div class="row">
           <div class="card col">
@@ -13,7 +13,7 @@
               <div class="d-flex justify-content-center">
                 <div class="card-title">
                   <center>
-                    <img src={% static 'img/default-FFA-avatar.2f8c2a0592bda1c5.png' %}
+                    <img src={% static 'img/user_default_pic.png' %}
                     style='border-radius:100%' width='100' height='100' />
                   </center>
                   <h4><b>{{login}}</b></h4>
@@ -37,22 +37,24 @@
               <div class='col-5'><hr></div>
              </div>
 
-              <div class="row gap-2 mb-3">
-                <a style='font-weight: bold;'
+              <div class="row px-2 gap-2 mb-3">
+                
+                  <a style='font-weight: bold;'
                   href="{% provider_login_url 'google' %}"
-                  class="btn btn-outline-info col"
-                  ><i class="bi bi-google"></i><br/>Google</a
-                >
-                <a style='font-weight: bold;'
-                  href="{% provider_login_url 'facebook' %}"
-                  class="btn btn-outline-primary col"
-                  ><i class="bi bi-facebook"></i><br/>Facebook</a
-                >
+                  class="btn btn-outline-success col"
+                  ><i class="bi bi-google"></i> <b>Google</b></a>
+                
+                
                 <a style='font-weight: bold;'
                   href="{% provider_login_url 'github' %}"
-                  class="btn btn-outline-success"
-                  ><i class="bi bi-github"></i><br/>GitHub</a
-                >
+                  class="btn btn-outline-secondary col"
+                  ><i class="bi bi-github"></i> <b>GitHub</b></a>
+                
+              
+                <a style='font-weight: bold;'
+                  href="{% provider_login_url 'facebook' %}"
+                  class="btn btn-outline-info col-12"
+                  ><i class="bi bi-facebook"></i> <b>Facebook</b></a>
                 
               </div>
             
