@@ -22,16 +22,13 @@
       </button>
       <div class="offcanvas offcanvas-end text-bg-info" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
         <div class="offcanvas-header text-bg-primary">
-                
-            
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button> 
         </div>
         <div class="offcanvas-body">
-          <div class='row d-flex align-items-end'>
+          <div class='row d-flex align-items-center'>
             {% if user.is_authenticated %}
           <div class="offcanvas-title col-9" id="offcanvasDarkNavbarLabel">
-            <div class='mt-lg-3 my-lg-0 my-2 ms-lg-2 m-0'>
+            <div class='ms-1'>
               <form class='row' action="{% url 'set_language' %}" method="post">{% csrf_token %}
                 <input name="next" type="hidden" value="{{ redirect_to }}">
                 <select onchange="this.form.submit()"  class="form-select " name="language">
