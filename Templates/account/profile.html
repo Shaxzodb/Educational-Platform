@@ -41,20 +41,22 @@
                     
                     <h5 class="card-title">@{{object.user.username}}</h5>
                     <hr class="p-0 my-1 m-0">
-                    <p class="card-text">Email: {{object.email}}</p>
-                    {% if object.last_name %}
-                    <p class="card-text">Last Name: {{object.last_name}}</p>
-                    {% endif %} {% if object.first_name %}
-                    <p class="card-text">First Name: {{object.first_name}}</p>
-                    {% endif %} {% if object.phone %}
-                    <p class="card-text">Phone: {{object.phone}}</p>
-                    {% endif %} {% if object.birth_date %}
-                    <p class="card-text">Birth date: {{object.birth_date}}</p>
-                    {% endif %} {% if object.location %}
-                    <p class="card-text">Location: {{object.location}}</p>
-                    {% endif %} {% if object.website %}
-                    <p class="card-text">Website: {{object.website|urlize}}</p>
-                    {% endif %}
+                    <div class='bg-body-secondary p-2'>
+                        <p class="card-text">Email: {{object.email}}</p>
+                        {% if object.last_name %}
+                        <p class="card-text">Last Name: {{object.last_name}}</p>
+                        {% endif %} {% if object.first_name %}
+                        <p class="card-text">First Name: {{object.first_name}}</p>
+                        {% endif %} {% if object.phone %}
+                        <p class="card-text">Phone: {{object.phone}}</p>
+                        {% endif %} {% if object.birth_date %}
+                        <p class="card-text">Birth date: {{object.birth_date}}</p>
+                        {% endif %} {% if object.location %}
+                        <p class="card-text">Location: {{object.location}}</p>
+                        {% endif %} {% if object.website %}
+                        <p class="card-text">Website: {{object.website|urlize}}</p>
+                        {% endif %}
+                    </div>
                     
                   </div>
               </div>
@@ -62,9 +64,9 @@
             </div>
           </div>
         </div>
-        <div class="card p-2 mt-1" style="width: 100%">
+        <div class="card p-3 mt-1" style="width: 100%">
             <div class="row g-0">
-                <h4>Bio</h4>
+                <h5><b>Bio</b></h5>
                 <div class='col'>
                     <div class="card-body ck-content bg-body-secondary">
                         {% if object.bio %}
