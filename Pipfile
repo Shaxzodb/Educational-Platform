@@ -13,12 +13,11 @@ phonenumbers = "*"
 django-autoslug = "*"
 django-allauth = "*"
 django = "*"
-django-admin-interface = "*"
-django-colorfield = "*"
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
 django-widget-tweaks = "*"
 django-rest-auth = "*"
+django-jazzmin = "*"
 
 [dev-packages]
 

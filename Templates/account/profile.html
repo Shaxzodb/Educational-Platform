@@ -1,15 +1,26 @@
 {% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %}
+{% load widget_tweaks %}
 {%block content %}
 <div class="container">
-  <div class="row py-3">
-    <div class="col-lg-6">
-        <div class="card" style="width: 100%">
+  
+  <div class='row p-1'>
+    <div class="card">
+      <div class="d-flex card-body justify-content-lg-start justify-content-sm-center">
+        <a class='me-3 nav-link' href='#'>Profile</a>
+        <a class='me-3 nav-link' href='#'>Friends</a>
+        <a class='me-3 nav-link' href='#'>Articles</a>
+      </div>
+    </div>
+  </div>
+  <div class="row ">
+    
+    <div class="col-lg-6 p-1">
+        <div class="card">
           <div class="row g-0">
-            <div style='' class="col-md-4 p-2 d-flex justify-content-center">
+            <div class="col-md-4 p-2 d-flex justify-content-center">
               {% if object.user_pic %}
 
                   {% if 'https' in object.user_pic.url %}
-                      {{saa}}
                       <img
                           style="object-fit: contain;"
                           src="{{object.user_pic}}"
@@ -35,13 +46,12 @@
                 {% endif %}
             </div>
             <div class="col-md-8">
-            
               <div class='col'>
                   <div class="card-body">
                     
                     <h5 class="card-title">@{{object.user.username}}</h5>
                     <hr class="p-0 my-1 m-0">
-                    <div class='bg-body-secondary p-2'>
+                    <div class='bg-body-secondary rounded p-2'>
                         <p class="card-text">Email: {{object.email}}</p>
                         {% if object.last_name %}
                         <p class="card-text">Last Name: {{object.last_name}}</p>
@@ -64,11 +74,11 @@
             </div>
           </div>
         </div>
-        <div class="card p-3 mt-1" style="width: 100%">
+        <div class="card p-3 mt-2" style="width: 100%">
             <div class="row g-0">
                 <h5><b>Bio</b></h5>
                 <div class='col'>
-                    <div class="card-body ck-content bg-body-secondary">
+                    <div class="card-body ck-content bg-body-secondary rounded">
                         {% if object.bio %}
                             {{object.bio|safe}}
                         {% else %}
@@ -80,7 +90,7 @@
             </div>
           </div>
     </div>
-    <div class="col-lg-6 mt-3 mt-lg-0">
+    <div class="col-lg-6 p-1 mt-0">
       <form method="post" class="form" enctype="multipart/form-data">
         <div class="card">
           <div class="card-body">

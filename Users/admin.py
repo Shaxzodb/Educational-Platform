@@ -25,15 +25,17 @@ class ExportCsvMixin:
 
     export_as_csv.short_description = "Export Selected"
 
+style = 'object-fit: cover; border-radius: 100%;'
+
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin, ExportCsvMixin):
     def thumb(self, obj):
         if obj.user_pic:
             if str(obj.user_pic).startswith("https://"):
-                return format_html(f"<img src='{str(obj.user_pic)}' style='border-radius:100%' width='35' height='35' />")
+                return format_html(f"<img src='{str(obj.user_pic)}' style='{style}' width='35' height='35' />")
             else:
-                return format_html(f"<img src='{str(obj.user_pic.url)}' style='border-radius:100%' width='35' height='35' />")
-        return format_html(f"<img src={static('img/user_default_pic.png')} style='border-radius:100%' width='35' height='35' />")
+                return format_html(f"<img src='{str(obj.user_pic.url)}' style='{style}' width='35' height='35' />")
+        return format_html(f"<img src={static('img/user_default_pic.png')} style='{style}' width='35' height='35' />")
 
     thumb.allow_tags = True
     thumb.__name__ = 'Thumb'
@@ -64,6 +66,7 @@ class ProfileAdmin(admin.ModelAdmin, ExportCsvMixin):
             'Addition',
             {
                 'fields' : (
+                    'headshot_image',
                     'user_pic',
                     'location',
                     'website',
@@ -84,6 +87,15 @@ class ProfileAdmin(admin.ModelAdmin, ExportCsvMixin):
     actions = ["export_as_csv"]
     list_display = ['thumb','user','email','phone','last_name','first_name']
     list_per_page = 25
+   
+    
+    def headshot_image(self, obj):
+        if obj.user_pic:
+            if str(obj.user_pic).startswith("https://"):
+                return format_html(f"<img src='{str(obj.user_pic)}' width='300px'/>")
+            else:
+                return format_html(f"<img src='{str(obj.user_pic.url)}' width='300px'/>")
+        return format_html("<img src='{url}' width='300px'/>".format(url = static('img/user_default_pic.png')))
     
     # Tanlangan Deleteni olib Tashlash
     def get_actions(self, request):
@@ -94,7 +106,7 @@ class ProfileAdmin(admin.ModelAdmin, ExportCsvMixin):
     change_list_template = "admin/change_list.html"
     
     # Faqat O'qish uchun
-    readonly_fields = ["slug","friends"]
+    readonly_fields = ["slug","friends","headshot_image"]
     
 @admin.register(CustomUserModel)
 class CustomUserAdmin(UserAdmin, ExportCsvMixin):
@@ -102,10 +114,10 @@ class CustomUserAdmin(UserAdmin, ExportCsvMixin):
     def thumb(self, obj):
         if obj.profile.user_pic:
             if str(obj.profile.user_pic).startswith("https://"):
-                return format_html(f"<img src='{str(obj.profile.user_pic)}' style='border-radius:100%' width='35' height='35' />")
+                return format_html(f"<img src='{str(obj.profile.user_pic)}' style='{style}' width='35' height='35' />")
             else:
-                return format_html(f"<img src='{str(obj.profile.user_pic.url)}' style='border-radius:100%' width='35' height='35' />")
-        return format_html(f"<img class='p-0 m-0 border' src={static('img/user_default_pic.png')} style='border-radius:100%' width='35' height='35' />")
+                return format_html(f"<img src='{str(obj.profile.user_pic.url)}'style='{style}' width='35' height='35' />")
+        return format_html(f"<img class='p-0 m-0 border' src={static('img/user_default_pic.png')} style='{style}' width='35' height='35' />")
     thumb.allow_tags = True
     thumb.__name__ = 'Thumb'
     add_fieldsets = UserAdmin.add_fieldsets + (

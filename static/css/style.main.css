@@ -1,6 +1,6 @@
 :root {
-    --primary: #13C5DD;
-    --secondary: #354F8E;
+    --primary: #0d6efd;
+    --info: #0dcaf0;
     --light: #EFF5F9;
     --dark: #1D2A4D;
 }
@@ -17,10 +17,11 @@
 
 
 .footer-distributed {
-  background-color: #292c2f;
+  background-color: var(--primary);
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   width: 100%;
+  padding: 25px !important;
   height: 250px;
   text-align: left;
   font: normal 16px sans-serif;
@@ -51,6 +52,7 @@
   transition: ease .25s;
 }
 
+
 .footer-distributed .footer-links a:before {
   content: "·";
   font-size: 20px;
@@ -74,11 +76,13 @@
   display: inline-block;
   width: 35px;
   height: 35px;
-  background-color: #33383b;
-  border-radius: 2px;
-  font-size: 20px;
-  color: #ffffff;
+  padding-top: 1px;
+  background-color: var(--light);
+  border-radius: 30%;
+  font-size: 26px;
+  color: var(--primary);
   text-align: center;
+  align-items: center;
   line-height: 35px;
   margin-left: 3px;
   transition:all .25s;
@@ -103,25 +107,6 @@
   }
 }
 
-/*========= Css code =========*/
-
-.form-login ,.form-signup{
-    width: 95%;
-}
-@media (min-width: 500px) and (max-width: 991.98px) {
-    .form-login,.form-signup{
-        width: 80%;
-    }
-}
-@media (min-width: 991.98px) {
-    .form-login{
-        width: 60%;
-    }
-    .form-signup{
-        width: 50%;
-    }
-}
-
 div.pagination{
     overflow-x: auto !important;
 }
@@ -129,30 +114,19 @@ div.pagination::-webkit-scrollbar {
   display: none;
 }
 
-/* .card{
-    box-sizing: border-box;
-    border-color: var(--secondary);
-} */
 .card-text-div{
     color:black;
 }
 .page-item .page-link{
-    color: var(--secondary);
+    color: var(--info);
 }
 .page-item .page-link:hover{
     color: var(--primary);
 }
 .form-control:focus{
-    border-color: var(--secondary);
+    border-color: var(--info);
 }
 
-/* Vertical */
-.login{
-  background-image: url('../img/gdpr-animate-2.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto;
-}
 .article-img{
   width: 50%;
   height: 300px;
@@ -177,4 +151,11 @@ div.pagination::-webkit-scrollbar {
 
 .container-fluid, .sticky-top mb-0 ,.bg-white ,.shadow-sm{
     margin:0 !important;
+}
+
+.login{
+  background-image: url('../img/gdpr-animate-2.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
 }
