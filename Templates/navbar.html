@@ -1,35 +1,26 @@
 {% load static %}
-
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
 {% get_language_info_list for LANGUAGES as languages %}
-<nav class="navbar navbar-dark bg-primary fixed-top">
-    <div class="container-fluid">
+<style>
+ 
+  .text-uppercase:hover,.dropdown-item:hover,li>a:hover{
+   
+    background-color:#0d6efd!important;
+  }
+  
+</style>
+<nav class="navbar navbar-dark bg-dark fixed-top">
+    <div class="container">
       <a class="navbar-brand m-0" href="#">Talim Platformasi</a>
       <div class='d-flex justify-content-between align-items-center'>
-        {% comment %} <div class='row'>
-          {% if user.is_authenticated %}
-          <div class="offcanvas-title col-6" id="offcanvasDarkNavbarLabel">
-            <div class='ms-1'>
-              <form class='row' action="{% url 'set_language' %}" method="post">{% csrf_token %}         
-                <select onchange="this.form.submit()"  class="form-select" name="language">
-                    {% for language in languages %}
-                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected {% endif %}>
-                            {{ language.name }}
-                        </option>
-                    {% endfor %}
-                </select>
-              </form> 
-            </div>
-          </div>
-          {% endif %}
-        </div>  {% endcomment %}
+ 
         {% if user.is_authenticated %}
         <div class="offcanvas-title" id="offcanvasDarkNavbarLabel">
           <div class="dropdown">
             <a href="#" class="text-uppercase p-1 nav-link text-white dropdown-toggle" data-bs-toggle="dropdown"><i class="bi text-white h5 bi-translate"></i> {{LANGUAGE_CODE}}</a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" dropdown-min-width='5rem'>
               {% for language in languages %}
               {% if language.code == 'en'  %}
               
@@ -45,43 +36,49 @@
         </div>
     
         {% endif %}
-        <button class="navbar-toggler shadow-none border-0 ms-2 rounded-circle p-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler text-white shadow-none border-0 ms-2 rounded-circle p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+          </svg>
         </button>
         
       </div>
-      <div class="offcanvas offcanvas-end text-bg-info" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-        <div class="offcanvas-header text-bg-primary">
-          <button type="button" class="shadow-none border-0 btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button> 
+      <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header px-1 bg-dark m-0 border-0">
+          <button type="button" class="shadow-none bg-dark text-white border-0  btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+          </button> 
         </div>
-        <div class="offcanvas-body">
+        <div class="offcanvas-body p-0">
                 
-          <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Bosh sahifa</a>
+                <a class="nav-link active px-3" aria-current="page" href="#">Bosh sahifa</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#">Kurslar</a>
+                <a class="nav-link active px-3" href="#">Kurslar</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#">Tadbirlar</a>
+                <a class="nav-link active px-3 " href="#">Tadbirlar</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#">Biz haqimizda</a>
+                <a class="nav-link active px-3" href="#">Biz haqimizda</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#">Bog'lanish</a>
+                <a class="nav-link active px-3" href="#">Bog'lanish</a>
               </li>
               {% if user.is_authenticated %}
 
               <div class="nav-item dropdown">
-                <a href="#" class="text-uppercase nav-link dropdown-toggle" data-bs-toggle="dropdown">{{user}}</a>
-                <div class="dropdown-menu border-0 text-dark bg-info m-0">
-                    <a href="{% url 'profile' user.profile.slug %}" class="dropdown-item"><i class="bi bi-person-circle"></i> Profile</a>
-                    <a href="" class="dropdown-item"><i class="bi bi-gear-wide"></i> Account Sittings</a>
+                <a href="#" class="text-uppercase nav-link dropdown-toggle px-3" data-bs-toggle="dropdown">{{user}}</a>
+                <div class="dropdown-menu border-0 bg-dark p-0 m-0">
+                    <a href="{% url 'profile' user.profile.slug %}" class="dropdown-item text-white px-4"><i class="bi bi-person-circle"></i> Profile</a>
+                    <a href="{% url 'settings' %}" class="dropdown-item text-white px-4"><i class="bi bi-gear-wide"></i> Settings</a>
 
-                    <hr class="dropdown-divider"/>
-                    <a class="dropdown-item" href="{% url 'account_logout'%}"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                    <hr class="dropdown-divider bg-white"/>
+                    <a class="dropdown-item text-white px-4" href="{% url 'account_logout'%}"><i class="bi bi-box-arrow-right"></i> Logout</a>
                 </div>
               </div>
             
@@ -89,7 +86,7 @@
               {% else %}
           
               <li class="nav-item">
-                <a class="nav-link active" href="{% url 'account_login' %}">Login <i class="bi bi-box-arrow-in-right"></i></a>
+                <a class="nav-link active px-3" href="{% url 'account_login' %}">Login <i class="bi bi-box-arrow-in-right"></i></a>
               </li>
 
               {% endif %}

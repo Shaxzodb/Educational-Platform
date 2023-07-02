@@ -12,12 +12,12 @@ django-ckeditor-5 = "*"
 phonenumbers = "*"
 django-autoslug = "*"
 django-allauth = "*"
-django = "*"
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
 django-widget-tweaks = "*"
 django-rest-auth = "*"
 django-jazzmin = "*"
+django = "*"
 
 [dev-packages]
 

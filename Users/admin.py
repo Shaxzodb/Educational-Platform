@@ -106,7 +106,8 @@ class ProfileAdmin(admin.ModelAdmin, ExportCsvMixin):
     change_list_template = "admin/change_list.html"
     
     # Faqat O'qish uchun
-    readonly_fields = ["slug","friends","headshot_image"]
+    readonly_fields = ["slug","headshot_image"]
+    #readonly_fields = ["slug","friends","headshot_image"]
     
 @admin.register(CustomUserModel)
 class CustomUserAdmin(UserAdmin, ExportCsvMixin):

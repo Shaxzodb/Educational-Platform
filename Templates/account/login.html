@@ -1,12 +1,13 @@
 {% extends 'base.html' %} {% load i18n %} {% load static %} 
 {% load socialaccount %} {% load crispy_forms_tags %} 
 {% block title %} {% trans "Tizimga kirish" %} {% endblock title %} {% block content %}
+
 {% trans "Tizimga kirish" as login %}
 <div class='container'>
-<div class="row">
+<div class="row g-0">
   <div class="col-lg-6 login p-0"></div>
   <div class="col-lg-6 p-0">
-    <div class="d-flex p-1 justify-content-center">
+    <div class="d-flex justify-content-end">
       <div class="">
         
           <div class="card col p-1">
@@ -40,6 +41,7 @@
 
               <div class="row px-2 gap-2 mb-3">
                 
+                
                   <a style='font-weight: bold;'
                   href="{% provider_login_url 'google' %}"
                   class="btn btn-outline-success col"
@@ -50,8 +52,9 @@
                   href="{% provider_login_url 'github' %}"
                   class="btn btn-outline-secondary col"
                   ><i class="bi bi-github"></i> <b>GitHub</b></a>
-                
               
+                
+                
                 <a style='font-weight: bold;'
                   href="{% provider_login_url 'facebook' %}"
                   class="btn btn-outline-info col-12"

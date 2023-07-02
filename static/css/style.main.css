@@ -1,8 +1,8 @@
 :root {
-    --primary: #0d6efd;
+    --primary:#0D6EFD;
     --info: #0dcaf0;
     --light: #EFF5F9;
-    --dark: #1D2A4D;
+    --dark: #101214;
 }
 .registration{
     background-color: var(--primary);
@@ -17,7 +17,7 @@
 
 
 .footer-distributed {
-  background-color: var(--primary);
+  background-color:  #212529;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   width: 100%;
@@ -117,17 +117,17 @@ div.pagination::-webkit-scrollbar {
 .card-text-div{
     color:black;
 }
-.page-item .page-link{
+.page-item .page-link {
     color: var(--info);
 }
-.page-item .page-link:hover{
+.page-item .page-link:hover {
     color: var(--primary);
 }
-.form-control:focus{
+.form-control:focus {
     border-color: var(--info);
 }
 
-.article-img{
+.article-img {
   width: 50%;
   height: 300px;
   background-image: url('../img/3973481.jpg');
@@ -149,13 +149,16 @@ div.pagination::-webkit-scrollbar {
   background-size: cover;
 }
 
-.container-fluid, .sticky-top mb-0 ,.bg-white ,.shadow-sm{
+.container-fluid, .sticky-top mb-0 ,.bg-white ,.shadow-sm {
     margin:0 !important;
 }
 
-.login{
+.login {
   background-image: url('../img/gdpr-animate-2.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
+}
+.dropdown-menu {
+  min-width: 5rem !important;
 }

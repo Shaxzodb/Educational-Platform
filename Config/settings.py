@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'APIs.apps.ApisConfig',
     'Base.apps.BaseConfig',
     'Users.apps.UsersConfig',
+    'Posts.apps.PostsConfig',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -78,7 +79,7 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'middleware.language.LocaleMiddleware',
+    #'middleware.language.LocaleMiddleware',
     'middleware.pathUrl.PathUrlMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.locale.LocaleMiddleware',

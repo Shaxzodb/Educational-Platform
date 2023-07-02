@@ -98,8 +98,8 @@ class Profile(ABSTRACTModel):
     )
     
     @property
-    def _username(self):
-        return self.user.username
+    def _username(self) -> str:
+        return str(self.user.username)
     
     def total_friends(self):
         return self.friends.count()
