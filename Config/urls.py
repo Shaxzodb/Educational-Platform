@@ -21,12 +21,13 @@ from django.urls import path, include
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
-    path('ckeditor5/', include('django_ckeditor_5.urls')),
+    path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
     path('accounts/', include('allauth.urls')),
 ] + i18n_patterns(
     path('admin/', admin.site.urls),
     path('apis/', include('APIs.urls')),
     path('', include('Base.urls')),
+    path('', include('Posts.urls')),
     path('user/', include('Users.urls')),
     # path('register/', include('django.contrib.auth.urls')),
     

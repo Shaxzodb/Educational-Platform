@@ -62,7 +62,7 @@ class Profile(ABSTRACTModel):
         max_length = 500,
         null = True,
         blank = True,
-        config_name='default'
+        config_name='extends_profile'
     )
     location = models.CharField(
         max_length = 125, 

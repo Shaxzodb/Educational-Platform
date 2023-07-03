@@ -18,16 +18,18 @@ class PostModel(ABSTRACTModel):
         get_user_model(),
         on_delete=models.CASCADE
     )
-    post_pic = models.ImageField(
-        help_text='Post Image',
-        upload_to = 'post_pics/',
-        blank = True, 
-        null  = True
-    )
+    # post_pic = models.ImageField(
+    #     help_text='Post Image',
+    #     upload_to = 'post_pics/',
+    #     blank = True, 
+    #     null  = True
+    # )
     post = CKEditor5Field(
         max_length = 500,
-        null = True,
-        blank = True,
-        config_name='default'
+        config_name='default',
     )
+    def __str__(self):
+        return self.post
+    
+    
     

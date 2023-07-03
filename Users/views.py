@@ -8,6 +8,7 @@ from django.shortcuts import redirect, get_object_or_404, render
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import ProfileForm
+from Posts.forms import PostForm
 from Posts.models import PostModel
 # Create your views here
 # class ProfileView(UpdateView):
@@ -40,6 +41,7 @@ class ProfileView(DetailView):
         
         posts = PostModel.objects.filter(user = user[0].user.id)
         context['form'] = ProfileForm(instance = profile)
+        context['post_form'] = PostForm()
         context['posts'] = posts
         return context
     def get_queryset(self):

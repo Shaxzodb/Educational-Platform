@@ -2,8 +2,8 @@
 {% load widget_tweaks %} {% load i18n %} {%block content %}
 <style>
   
-  .bor {
-    box-sizing: border-box;
+  * {
+    box-sizing: der-box;
   }
   {% comment %} .input-group {
     display:none;
@@ -12,7 +12,7 @@
     display: none;
   }
   #myImg {
-    border-radius: 5px;
+    der-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
   }
@@ -72,6 +72,12 @@
     to {transform:scale(1)}
   }
   
+  .top{
+    position:absolute;
+    top:40%;
+    display:none;
+  }
+  
   
  
   .close-img {
@@ -101,46 +107,80 @@
       width: 100%;
     }
   }
+  
+  figure,.ck-content img {
+    
+    width: 100% ;
+    max-width: 100% ;
+    object-fit: contain;
+  }
+  .comment-wrapper .panel-body {
+    max-height:400px;
+    overflow:auto;
+    width: 100%;
+   
+}
+@media only screen and (min-width:998px){
+  .col-lg-5{
+    height:100vh;
+  }
+  .col-lg-4{
+    height:100vh;
+  }
+  .col-lg-3{
+    height:100vh;
+  }
+}
+@media only screen and (max-width:998px){
+  .friend{
+    height:300px;
+  }
+}
 </style>
 <div class="container">
   <div class="row g-0">
     <div class="col-12 p-0">
-      <div class="card shadow bg-white">
+      <div class="card rounded-0 shadow-sm bg-primary text-white">
         <div class="d-flex card-body py-2 justify-content-between">
           <div class="d-flex py-2 align-items-center">
             <a class="me-3 m-0 nav-link" href="#">Profile</a>
             <a class="me-3 m-0 nav-link" href="#">Friends</a>
             <a class="m-0 nav-link" href="#">Articles</a>
           </div>
-          {% if user != object.user %}
-          <div>
-            <button class='btn px-2 btn-primary'>
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
-                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
-              </svg>
-            </button>
-          </div>
+          {% if object.user.id != user.id %}
+          <button class='btn px-2 btn-primary-emphasis p-1'>
+              
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 20">
+              <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+              <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+          </button>
           {% endif %}
+          
         </div>
       </div>
     </div>
+   
 
-    <div class="col-lg-4 bor p-0 mt-2">
-      <div class="card bg-white shadow">
+    <div class="col-lg-4 scroll overflow-auto pt-2 ">
+      
+      <div class="card rounded-0 bg-white shadow-sm">
         
         <div class="row g-0">
           <div class="col-12 col">
             <div class="card-body">
           
       
-              <div class="card-title bg-light p-1 d-flex justify-content-center">
+              <div class="card-title rounded position-relative bg-body-secondary p-2 d-flex justify-content-center">
                 {% if object.user_pic %} 
+                <svg class='top' id='top' xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrows-fullscreen" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z"/>
+                </svg>
                 {% if 'https' in object.user_pic.url %}
                 
                   <img id="myImg"
                   style="
-                  border: 1px solid blue;
+                  border: 5px solid #fff!important;
                   object-fit: cover;
                   width: 150px;
                   color: #fff;
@@ -149,12 +189,12 @@
                   border-radius: 100%;
                 "
                         src="{{object.user_pic}}"
-                        class="img-full rounded-circle"
+                        class="img-full"
                         alt="..."/>
                 {% else %}
                       <img id="myImg"
                       style="
-                      border: 1px solid blue;
+                      border: 5px solid #fff!important;
                       object-fit: cover;
                       width: 150px;
                       color: #fff;
@@ -163,7 +203,7 @@
                       border-radius: 100%;
                     "
                         src="{{object.user_pic.url}}"
-                        class="img-full rounded-circle"
+                        class="img-full"
                         alt="..."
                       />
                 {% endif %} 
@@ -173,6 +213,7 @@
                   <h1
                     class="text-uppercase m-0 d-flex justify-content-center align-items-center"
                     style="
+                      border: 5px solid #fff!important;
                       width: 150px;
                       color: #fff;
                       height: 150px;
@@ -192,50 +233,35 @@
                 @{{object.user.username}}
             </h5>
               <hr class="p-1 m-0" />
-              <div class="rounded p-2">
+              <div class="p-1">
                 {% if object.last_name or object.first_name  %}
                 <p style="font-size: 18px" class="card-text m-0"> 
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                  </svg>
+                  👤
                   {{object.last_name}} {{object.first_name}}</p>
                 {% endif %}  
                 <p style="font-size: 18px" class="card-text m-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
-                    <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2H2Zm-2 9.8V4.698l5.803 3.546L0 11.801Zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586l-1.239-.757ZM16 9.671V4.697l-5.803 3.546.338.208A4.482 4.482 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671Z"/>
-                    <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034v.21Zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791Z"/>
-                  </svg>
+                  📧
                   {{object.email}}</p>
                 {% if object.phone %}
                 <p style="font-size: 18px" class="card-text m-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-                  </svg>
+                  ☎️
                   {{object.phone}}</p>
                 {% endif %} {% if object.birth_date %}
                 <p style="font-size: 18px" class="card-text m-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
-                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                  </svg>
+                  📆
                   {{object.birth_date}}</p>
-                {% endif %} {% if object.location %}
+                {% endif %} {% if object.website %}
                 <p style="font-size: 18px" class="card-text m-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                  🌐
+                  {{object.website|urlize}}</p>
+                {% endif %}
+                {% if object.location %}
+                <p style="font-size: 18px" class="card-text m-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="-2 0 16 20">
                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                   </svg>
                   {{object.location}}</p>
-                {% endif %} {% if object.website %}
-                <p style="font-size: 18px" class="card-text m-0">
-                 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
-                      <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
-                      <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
-                    </svg>
-                  
-                  {{object.website|urlize}}</p>
-                {% endif %}
+                {% endif %} 
               </div>
               {% if user.is_authenticated and user.id == object.user.id%}
               <hr class="my-2 p-0" />
@@ -246,22 +272,7 @@
                 data-bs-target="#exampleModal"
                 data-bs-whatever="@mdo"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-pencil-square"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                  />
-                </svg>
+              📝
                 {% trans "Profilni tahrirlash" %}
               </a>
               {% endif %}
@@ -269,39 +280,43 @@
           </div>
         </div>
       </div>
-      <div class="card shadow bg-white p-3 mt-2" style="width: 100%">
+      <div class="card rounded-0 shadow-sm bg-white p-3 mt-1" style="width: 100%">
         <div class="row g-0">
           <h5><b>Bio</b></h5>
           <hr class="p-1 m-0" />
           <div class="col">
-            <div class="card-body p-0 ck-content rounded">
+            <div class="card-body p-0 ck-content ">
               {% if object.bio %} {{object.bio|safe}} {% else %} None {% endif %}
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-5 mt-2 bor px-lg-2 px-0">
-      <div class='card shadow bg-light'>
+    
+  </div>
+    <div class="col-lg-5 px-lg-2 px-0 scroll overflow-auto">
+      {% if user.is_authenticated and user.id == object.user.id%}
+      <div class='card rounded-0 mt-2 shadow-sm bg-light'>
+        
         <div class='card-body'>
+          
           <table class='w-100'>
             <tr>
               <td>
                 
-                      <div style="width:55px;height: 55px;">
+                      <div class='' data-bs-toggle="modal" data-bs-target="#exampleModal1" data-bs-whatever="@getbootstrap" style="width:55px;height: 55px;">
                         <center>
                           <h5
-                            class="bg-warning text-uppercase m-0 d-flex justify-content-center align-items-center"
+                            class="rounded-circle bg-warning text-uppercase m-0 d-flex justify-content-center align-items-center"
                             style="
                               width: 55px;
                               color: #fff;
                               height: 55px;
                               
                               color: #fff !important;
-                              border-radius: 100%;
+                              der-radius: 100%;
                             "
                           >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
                             <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                             <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
                           </svg>
@@ -311,44 +326,153 @@
                      
               </td>
               <td>
-                <input type='button' class='border text-secondary text-start ps-2 py-2 w-100 border-primary rounded-pill' value="What's on your mind?">
+                <input data-bs-toggle="modal" data-bs-target="#exampleModal1" data-bs-whatever="@getbootstrap" type='button' class='border-0 rounded text-secondary text-start ps-2 py-2 w-100 der-primary -pill' value="What's on your mind?">
               </td>
             </tr>
           </table>
+          
+          
+         
         </div>
       </div>
-      
+      {% endif %}
       {% if posts.exists %}
-      <div style ='height:500px' class = 'mt-1 overflow-auto scroll'>
+      <div class = 'pt-1 p-0'>
         {% for post in posts.all reversed%}
-        <div class='card shadow-sm bg-white mx-0 mx-lg-2' style='margin-top:8px!important;'>
-          <div class='card-body'>
+        <div class='card shadow-sm bg-white mx-0 mt-1' style=''>
+          <div class='card-title d-flex justify-content-between align-items-center m-1 mx-2'>
+            <div class='d-flex align-items-center justify-content-start'>
+              {% if object.user.profile.user_pic %}
+                      
+                        {% if 'https' in object.user.profile.user_pic.url %}
+                        
+                        <img
+                          src="{{object.user.profile.user_pic}}"
+                          style="
+                            border: 1px solid dark;
+                            object-fit: cover;
+                            width: 30px;
+                            color: #fff;
+                            height: 30px;
+                            color: fff !important;
+                            border-radius: 100%;
+                          "
+                        />
+                        
+                        {% else %}
+                        
+                        <img
+                          src="{{object.user.profile.user_pic.url}}"
+                          style="
+                            border: 1px solid dakr;
+                            object-fit: cover;
+                            width: 30px;
+                            color: #fff;
+                            height: 30px;
+                            color: fff !important;
+                            border-radius: 100%;
+                          "
+                        />
+                        {% endif %}
+                        
+                     
+                      {% else %}
+                      <div style="width: 30px;height: 30px">
+                        <center>
+                          <h5
+                            class="text-uppercase m-0 d-flex justify-content-center align-items-center"
+                            style="
+                              width: 30px;
+                              color: #fff;
+                              height: 30px;
+                              background-color: blue;
+                              color: #fff !important;
+                              border-radius: 100%;
+                            "
+                          >
+                            {{object.user.username|slice:"0:1"}}
+                          </h5>
+                        </center>
+                      </div>
+                      {% endif %}
+                      <div class='d-flex flex-column bd-highlight'>
+                      <b class='ps-2 p-0 m-0' style='font-size:16px'>{{object.user.username}}</b><date class='ps-2 p-0 m-0' style='font-size:10px'>{{object.created}}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 20">
+                          <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"/>
+                          <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"/>
+                          <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+                        </svg>
+                      </date>
+                      </div>
+            </div>
+            {% if post.user.id == user.id%}
+      <div class="dropdown show">
+          <button role="button"class='btn border-0 p-0' data-bs-toggle="dropdown" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+              <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+            </svg>
+          </button>
+        
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">
+             
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 20">
+                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+              </svg>
+              Delete
+            </a></li>
+            <li><a class="dropdown-item" href="#">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 20">
+                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+              </svg>
+              Edit
+            </a></li>
+            
+          </ul>
+        </div>
+        {% endif %}
+          </div>
+          <hr class="m-0 p-0"/>
+          <div class='card-body ck-content'>
+            
+            
           {{post.post|safe}}
           </div>
         </div>
         {% endfor %}
+        
       </div>
       {% else %}
-      <div class='card shadow-sm bg-white mt-1 mx-0 mx-lg-2'>
+      <div class='card shadow-sm bg-white mt-2'>
         <div class='card-body'>
-        <h5 class='m-0'><center>None Post</center></h5>
+        <h5 class='m-0'><center>There are no posts yet</center></h5>
         </div>
       </div>
       {% endif %}
+      <div class='card rounded-0 rounded-top mt-1'>
+        <div class='card-body text-secondary'>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar-check" viewBox="0 0 16 20">
+            <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+          </svg> {{object.user.created}} Qushilgan
+        </div>
+       
+      </div>
       
     </div>
-    <div class="col-lg-3 p-0 mt-2 bor">
+    <div class="col-lg-3 pt-2 scroll overflow-auto">
       
-      <div class="card bg-white shadow" style="width: 100%">
-        <div class="row g-0 bg-light rounded">
+      <div class="card rounded-0 bg-white shadow-sm" style="width: 100%">
+        <div class="row g-0 bg-light ">
           <h5 class='p-3 m-0'><b>Friends</b></h5>
-          <hr class="m-0" />
-          <div class="col  rounded-bottom bg-white border">
-            <div style='height:250px' class="card-body px-1 scroll rounded overflow-auto">
+          <hr class="m-0"/>
+          <div class="col bg-white der">
+            <div class="card-body friend px-1 scroll overflow-auto ">
               {% if object.user.profile.friends.exists %}
               <table class='w-100'>
               {% for friend in object.user.profile.friends.all %}
-                  <tr class='border-bottom border border-primary border-0'>
+                  <tr class='border-bottom border-dakr border-0'>
                     <td class='p-1'>
                       {% if friend.profile.user_pic %}
                       
@@ -357,11 +481,11 @@
                         <img
                           src="{{friend.profile.user_pic}}"
                           style="
-                            border: 1px solid blue;
+                            border: 1px solid dark;
                             object-fit: cover;
-                            width: 35px;
+                            width: 40px;
                             color: #fff;
-                            height: 35px;
+                            height: 40px;
                             color: fff !important;
                             border-radius: 100%;
                           "
@@ -372,11 +496,11 @@
                         <img
                           src="{{friend.profile.user_pic.url}}"
                           style="
-                            border: 1px solid blue;
+                            border: 1px solid dakr;
                             object-fit: cover;
-                            width: 35px;
+                            width: 40px;
                             color: #fff;
-                            height: 35px;
+                            height: 40px;
                             color: fff !important;
                             border-radius: 100%;
                           "
@@ -385,14 +509,14 @@
                         
                      
                       {% else %}
-                      <div style="width: 35px;height: 35px">
+                      <div style="width: 40px;height: 40px">
                         <center>
                           <h5
                             class="text-uppercase m-0 d-flex justify-content-center align-items-center"
                             style="
-                              width: 35px;
+                              width: 40px;
                               color: #fff;
-                              height: 35px;
+                              height: 40px;
                               background-color: blue;
                               color: #fff !important;
                               border-radius: 100%;
@@ -433,7 +557,11 @@
           </div>
         </div>
       </div>
-      {% if user.is_authenticated and user.id == object.user.id%}
+    
+    </div>
+  </div>
+</div>
+{% if user.is_authenticated and user.id == object.user.id%}
       <div
         class="modal fade"
         id="exampleModal"
@@ -446,7 +574,7 @@
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel">
                 Profile Data Edit
-              </h1>
+              </h1> 📝 
               <button
                 type="button"
                 class="btn-close"
@@ -471,7 +599,7 @@
                     {% csrf_token %} {% crispy form %}
                     <div class="d-flex justify-content-end">
                       <button type="submit" class="btn btn-primary m-2">
-                        Save
+                        Edit Save
                       </button>
                     </div>
                   </div>
@@ -482,10 +610,40 @@
           </div>
         </div>
       </div>
-      {% endif %}
+    
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New Post</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'create_post' %}"
+                method="post"
+                class="form"
+                novalidate
+                enctype="multipart/form-data"
+              >
+              
+              {% csrf_token %}
+              {{post_form }}
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary m-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                  </svg>
+                  <b>Post</b>
+                </button>
+              </div>
+              
+</form>
+      </div>
+      
     </div>
   </div>
 </div>
+{% endif %}
 <div id="myModal" class="modal-img">
   <div class='close-img'>
     <span class="d-flex justify-content-center align-items-center" style='height:50px;'>&times;</span>
@@ -498,8 +656,17 @@
   // Get the modal
   var modal = document.getElementById("myModal");
   
+  
   // Get the image and insert it inside the modal - use its "alt" text as a caption
   var img = document.getElementById("myImg");
+  img.addEventListener("mouseover", hover);
+  img.addEventListener("mouseleave", hover1);
+  function hover(){
+    document.getElementById("top").style.display='block';
+  }
+  function hover1(){
+    document.getElementById("top").style.display='none';
+  }
   var modalImg = document.getElementById("img01");
   var captionText = document.getElementById("caption-img");
   img.onclick = function(){
