@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import ProfileForm
 from Posts.forms import PostForm
 from Posts.models import PostModel
+from django.http import HttpResponseRedirect
 # Create your views here
 # class ProfileView(UpdateView):
 #     model = Profile
@@ -40,9 +41,16 @@ class ProfileView(DetailView):
         user = Profile.objects.filter(slug = self.kwargs['slug'])
         
         posts = PostModel.objects.filter(user = user[0].user.id)
+        
+        try:
+            my_user = Profile.objects.get(id = self.request.user.id)
+            user_friend = my_user.friends.filter(id = user[0].user.id).exists()
+        except:
+            user_friend = False
         context['form'] = ProfileForm(instance = profile)
         context['post_form'] = PostForm()
         context['posts'] = posts
+        context['friend_config'] = user_friend
         return context
     def get_queryset(self):
         return super().get_queryset().select_related('user')
@@ -55,4 +63,26 @@ def user_data_save(request, slug):
         if form.is_valid():
             form.save()
     return redirect('profile', request.user.profile.slug)
+
+@login_required()
+def friends(request, slug):
+    if request.method == 'POST':
+        user_profile = get_object_or_404(Profile, slug=slug)
+        if request.user.profile.friends.filter(id = user_profile.user.id).exists():
+            request.user.profile.friends.remove(user_profile.user)
+        else:
+            request.user.profile.friends.add(user_profile.user)
+    return HttpResponseRedirect(reverse('profile', args=[str(slug)]))
+
+@login_required()
+def friends_remove(request, slug):
+    user_profile = Profile.objects.get(slug = request.user.profile.slug)
+    if request.method == 'POST':
+        
+        
+        user = Profile.objects.get(slug=slug)
+        if user_profile.friends.filter(id = user.user.id).exists():
+            user_profile.friends.remove(user.user)
+        
+    return HttpResponseRedirect(reverse('profile', args=[str(user_profile.user.profile.slug)]))
     

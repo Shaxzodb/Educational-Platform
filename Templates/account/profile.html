@@ -147,14 +147,30 @@
             <a class="me-3 m-0 nav-link" href="#">Friends</a>
             <a class="m-0 nav-link" href="#">Articles</a>
           </div>
+          
           {% if object.user.id != user.id %}
-          <button class='btn px-2 btn-primary-emphasis p-1'>
+          <form action={% url 'friend' object.slug%} method="post" >
+            {% csrf_token %}
+            {% if friend_config %}
               
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 20">
-              <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-              <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-            </svg>
-          </button>
+              <button class="btn px-2 btn-primary-emphasis p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-dash-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M11 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+                  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                </svg>
+              </button>
+        
+            {% else %}
+              <button class='btn px-2 btn-primary-emphasis p-1'>
+              
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                  <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                </svg>
+                </button>
+            {% endif %}
+        </form>
+          
           {% endif %}
           
         </div>
@@ -248,7 +264,7 @@
                   {{object.phone}}</p>
                 {% endif %} {% if object.birth_date %}
                 <p style="font-size: 18px" class="card-text m-0">
-                  📆
+                  🥳
                   {{object.birth_date}}</p>
                 {% endif %} {% if object.website %}
                 <p style="font-size: 18px" class="card-text m-0">
@@ -396,7 +412,7 @@
                       </div>
                       {% endif %}
                       <div class='d-flex flex-column bd-highlight'>
-                      <b class='ps-2 p-0 m-0' style='font-size:16px'>{{object.user.username}}</b><date class='ps-2 p-0 m-0' style='font-size:10px'>{{object.created}}
+                      <p class='ps-2 fw-bold p-0 m-0' style='font-size:16px'>{{object.user.username}}</p><date class='ps-2 p-0 m-0' style='font-size:10px'>{{object.created}}
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 20">
                           <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"/>
                           <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"/>
@@ -451,11 +467,8 @@
       </div>
       {% endif %}
       <div class='card rounded-0 rounded-top mt-1'>
-        <div class='card-body text-secondary'>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar-check" viewBox="0 0 16 20">
-            <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-          </svg> {{object.user.created}} Qushilgan
+        <div class='card-body text-secondary d-flex justify-content-center'>
+          📆 {{object.user.created}} Qushilgan
         </div>
        
       </div>
@@ -464,8 +477,11 @@
     <div class="col-lg-3 pt-2 scroll overflow-auto">
       
       <div class="card rounded-0 bg-white shadow-sm" style="width: 100%">
-        <div class="row g-0 bg-light ">
-          <h5 class='p-3 m-0'><b>Friends</b></h5>
+        <div class="row g-0 bg-light">
+          <div class='d-flex justify-content-between px-2 py-2 align-items-center'>
+          <p class='p-0 m-0'>({{object.user.profile.total_friends}})<b class='' style='font-size:20px'>🫂</b></p>
+          <b class='' style='font-size:18px'>See all friends</b>
+          </div>
           <hr class="m-0"/>
           <div class="col bg-white der">
             <div class="card-body friend px-1 scroll overflow-auto ">
@@ -473,6 +489,7 @@
               <table class='w-100'>
               {% for friend in object.user.profile.friends.all %}
                   <tr class='border-bottom border-dakr border-0'>
+                    
                     <td class='p-1'>
                       {% if friend.profile.user_pic %}
                       
@@ -529,20 +546,27 @@
                       {% endif %}
 
                     </td>
-                    <td class='p-1'>{{friend.username|slice:"0:15"}}</td>
+                    <td class='p-1 w-100'>
+                      <a class='text-dark text-decoration-none' href="{% url 'profile' friend.profile.slug %}">
+                      {{friend.username|slice:"0:15"}}
+                      </a>
+                    </td>
+                  
                     {% if user.is_authenticated and user.id == object.user.id%}
                     <td class='p-1'>
-                      
-                    <a
-                      style="text-decoration: none; font-size: 18px"
-                      class="me-2 text-danger"
-                      href=""
-                      >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-dash-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M11 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
-                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                      </svg>
-                    </a>
+                      <form class='p-0 m-0' action="{% url 'friends_remove' friend.profile.slug %}" method="post" >
+                        {% csrf_token %}
+                          
+                            <button
+                              style="font-size: 18px"
+                              class="me-2 text-decoration-none text-danger btn border-0"
+                              href=""
+                              >
+                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-dash-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M11 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+                                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                              </svg>
+                            </button>
                     </td>
                     {% endif %}
                   </tr>
