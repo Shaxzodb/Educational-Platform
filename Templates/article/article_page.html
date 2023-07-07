@@ -2,9 +2,9 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% load pagination_tags %}
-{% block title %} 
-{% trans "Maqolalat Sahifasi" %} 
-{% endblock %} 
+{% block title %}
+{% trans "Maqolalat Sahifasi" %}
+{% endblock %}
 {% block content %}
 <style>
     * {
@@ -17,7 +17,7 @@
     .sc{
         display:none;
     }
-    
+
 </style>
 
 <div class="container py-3">
@@ -25,8 +25,8 @@
         <div class='mb-3'>
             <div class='row py-0'>
                 <div class='col-lg-6'>
-                    {% autopaginate object_list 9 %}
-       
+                    {% autopaginate object_list 12 %}
+
                     {% if paginator.num_pages %}
                     <div class="pagination">
                         {% paginate %}
@@ -36,7 +36,7 @@
                 <div class='col-lg-6'>
                     <form class="d-flex justify-content-end row " method='GET'>
                         <div class='col-9 col-lg-10 pe-0'>
-                        {{filter.form}} 
+                        {{filter.form}}
                         </div>
                         <div class='col-3 ps-0 col-lg-2 '>
                             <button class='rounded-start-0 w-100 shadow-none btn btn-outline-primary'>
@@ -50,9 +50,9 @@
             </div>
         </div>
     </div>
-    <div class='card p-2 bg-white'>
-        <div class="row row-cols-2 row-cols-md-2 row-cols-xl-3 g-1">
-            
+    <div class='card rounded-0 p-1 bg-white'>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-1">
+
         {% for article in object_list.all %}
         <div class="col">
             <div class="card bg-body-tertiary border-0 h-100">
@@ -61,52 +61,54 @@
                 {% else %}
                 <img src="{% static 'img/woocommerce-placeholder-300x300.png' %}" class="card-img-top rounded-0" alt="...">
                 {% endif %}
-              <div class="card-body">
+              <div class="card-body px-2">
 
-                <div class="d-flex justify-content-start">
+                <div class="d-flex justify-content-start align-items-bottom">
+
+                        <a class='text-decoration-none text-dark' href={% url 'profile' article.author.profile.slug%}>
                     {% if article.author.profile.user_pic %}
-                      
+
                         {% if 'https' in article.author.profile.user_pic.url %}
-                        
+
                         <img
                           src="{{article.author.profile.user_pic}}"
                           style="
-                            border: 1px solid dark;
+
                             object-fit: cover;
-                            width: 30px;
+                            width: 28px;
                             color: #fff;
-                            height: 30px;
+                            height: 28px;
                             color: fff !important;
                             border-radius: 100%;
                           "
                         />
-                        
+
                         {% else %}
-                        
+
                         <img
                           src="{{article.author.profile.user_pic.url}}"
                           style="
-                            border: 1px solid dakr;
+
                             object-fit: cover;
-                            width: 30px;
+                            width: 28px;
                             color: #fff;
-                            height: 30px;
+                            height: 28px;
                             color: fff !important;
                             border-radius: 100%;
                           "
                         />
                         {% endif %}
-                        
-                     
+
+
                       {% else %}
-                      <div style="width: 30px;height: 30px">
+                      <div style="width: 28px;height: 28px">
                         <center>
                           <h5
                             class="text-uppercase m-0 d-flex justify-content-center align-items-center"
                             style="
-                              width: 30px;
+                              width: 28px;
                               color: #fff;
-                              height: 30px;
+                              height: 28px;
                               background-color: blue;
                               color: #fff !important;
                               border-radius: 100%;
@@ -117,29 +119,31 @@
                         </center>
                       </div>
                       {% endif %}
-                    <h5 class='ps-1'>
-                        <a class='text-decoration-none text-dark' href={% url 'profile' article.author.profile.slug%}>{{article.author}}</a>
-                    </h5>
+                     <b style='font-size:16px;' class='ps-1'>
+                    {{article.author}}
+                    </b>
+                    </a>
+
                     </div>
-                    <div class='cart-title'>
+                    <div class='cart-title pt-1 ps-1'>
                         <a href={% url 'article_detail' article.slug%}>#{{article}}</a>
                     </div>
                 <p class="card-text"></p>
               </div>
-              <div class='card-footer bg-body-tertiary border-0 rounded-0'>
-                <div class="card-text d-flex justify-content-between"><small class="text-muted"><time>{{article.created_at}}</time></small><strong class='text-muted'>{{article.hit_count.hits}} 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 18">
+              <div class='card-footer px-2 bg-body-tertiary border-0 rounded-0'>
+                <div class="card-text d-flex justify-content-between"><small class="text-muted"><p style='font-size:16px;'>{{article.created_at}}</p></small><p style='font-size:16px;' class='text-muted'>{{article.hit_count.hits}}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 18">
                         <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                         <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                       </svg>
-                </strong></div>
+                </p></div>
             </div>
             </div>
           </div>
         {% endfor %}
         </div>
         </div>
-    
+
 </div>
 <script>
     var label=document.querySelector("label[for='id_title_at__icontains']");
