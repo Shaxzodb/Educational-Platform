@@ -18,6 +18,10 @@ django-widget-tweaks = "*"
 django-rest-auth = "*"
 django-jazzmin = "*"
 django = "*"
+django-hitcount = "*"
+django-filter = "*"
+django-ratelimit = "*"
+django-pagination-bootstrap = "*"
 
 [dev-packages]
 

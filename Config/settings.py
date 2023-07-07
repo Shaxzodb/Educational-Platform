@@ -44,12 +44,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     # ! External APPS
-    
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'hitcount',
+    'autoslug',
+    'django_filters',
     'crispy_forms',
     'crispy_bootstrap5',
+    "django_pagination_bootstrap",
     'phonenumber_field',
     'django_ckeditor_5',
     'widget_tweaks',
@@ -62,9 +65,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     # ! Internal APPS
     'APIs.apps.ApisConfig',
+    'Articles.apps.ArticlesConfig',
     'Base.apps.BaseConfig',
     'Users.apps.UsersConfig',
     'Posts.apps.PostsConfig',
+    'Comments',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -88,6 +93,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_pagination_bootstrap.middleware.PaginationMiddleware",
 ]
 
 ROOT_URLCONF = 'Config.urls'
@@ -316,7 +322,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'Users.CustomUserModel'
 
-LOGIN_REDIRECT_URL = 'base'
+LOGIN_REDIRECT_URL = 'article_list'
 # LOGOUT_REDIRECT_URL = 'login'
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
@@ -546,3 +552,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # ! Media files
 MEDIA_URL = 'media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
+
+PAGINATION_DEFAULT_PAGINATION=2
+PAGINATION_DEFAULT_ORPHANS=0
+PAGINATION_INVALID_PAGE_RAISES_404=True

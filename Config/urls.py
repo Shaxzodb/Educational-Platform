@@ -29,6 +29,8 @@ urlpatterns = [
     path('', include('Base.urls')),
     path('', include('Posts.urls')),
     path('user/', include('Users.urls')),
+    path('', include('Articles.urls')),
+    path('', include('Comments.urls')),
     # path('register/', include('django.contrib.auth.urls')),
     
 ) + static(

@@ -3,7 +3,7 @@
 <style>
   
   * {
-    box-sizing: der-box;
+    box-sizing: border-box;
   }
   {% comment %} .input-group {
     display:none;
@@ -264,7 +264,7 @@
                   {{object.phone}}</p>
                 {% endif %} {% if object.birth_date %}
                 <p style="font-size: 18px" class="card-text m-0">
-                  🥳
+                  🎉
                   {{object.birth_date}}</p>
                 {% endif %} {% if object.website %}
                 <p style="font-size: 18px" class="card-text m-0">
@@ -610,7 +610,6 @@
               <form action="{% url 'save' object.user.profile.slug %}"
                 method="post"
                 class="form"
-                
                 enctype="multipart/form-data"
               >
                 <div class="card">
