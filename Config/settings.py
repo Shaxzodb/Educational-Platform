@@ -292,15 +292,15 @@ CKEDITOR_5_CONFIGS = {
             ]
         }
     },
-    
+
     'extends_profile':{
         'blockToolbar': [],
-        'toolbar': [ 
+        'toolbar': [
             'bold', 'italic', 'link','|','fontFamily'
         ],
-        
+
     },
-    'list': {   
+    'list': {
         'properties': {
             'styles': 'true',
             'startIndex': 'true',
@@ -322,13 +322,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'Users.CustomUserModel'
 
-LOGIN_REDIRECT_URL = 'article_list'
-# LOGOUT_REDIRECT_URL = 'login'
+#LOGIN_REDIRECT_URL = 'article_list'
+LOGOUT_REDIRECT_URL = 'account_login'
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_REQUIRED = True
-
+ACCOUNT_ADAPTER = "Users.views.MyAccountAdapter"
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -386,7 +387,7 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 
-    
+
 }
 
 # CRISPY FORMS FONTS
@@ -437,7 +438,7 @@ JAZZMIN_SETTINGS = {
     "copyright": "Acme Library Ltd",
 
     # List of model admins to search from the search bar, search bar omitted if excluded
-    # If you want to use a single search field you dont need to use a list, you can use a simple string 
+    # If you want to use a single search field you dont need to use a list, you can use a simple string
     "search_model": ["Users.CustomUserModel"],
 
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
@@ -461,7 +462,7 @@ JAZZMIN_SETTINGS = {
 
         # App with dropdown menu to all its models pages (Permissions checked against models)
         {"app": "Users"},
-        
+
     ],
 
     #############
@@ -490,11 +491,11 @@ JAZZMIN_SETTINGS = {
     # Hide these models when generating side menu (e.g auth.user)
     "hide_models": [],
 
-    
+
 
     # Custom links to append to app groups, keyed on app name
     "custom_links": {
-        
+
     },
 
     # Custom icons for side menu apps/models See https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.0.1,5.0.10,5.0.11,5.0.12,5.0.13,5.0.2,5.0.3,5.0.4,5.0.5,5.0.6,5.0.7,5.0.8,5.0.9,5.1.0,5.1.1,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2
@@ -503,7 +504,7 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-gear",
         "Users.CustomUserModel": "fas fa-users",
         "Users.Profile":"fas fa-book",
-        "Sites.Site":"fas fa-plus"   
+        "Sites.Site":"fas fa-plus"
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",
