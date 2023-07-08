@@ -5,5 +5,4 @@ urlpatterns = [
     path('profile/user-data-save/<slug:slug>/', user_data_save, name = 'save'),
     path('friend/<slug:slug>', friends, name = 'friend'),
     path('friend-remove/<slug:slug>', friends_remove, name = 'friends_remove'),
-   
 ]
